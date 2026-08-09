@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# REPLACE DOMAIN: update once the final domain is live
+Sitemap: https://www.ameedave.com/sitemap.xml

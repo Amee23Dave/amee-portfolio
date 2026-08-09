@@ -1,0 +1,84 @@
+/* =========================================================
+   ANIMATIONS.CSS
+   Keyframes + motion-only rules. All motion here is restrained:
+   no bounce, no elastic easing, no parallax.
+   Respects prefers-reduced-motion (see rule at bottom).
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Full-screen page transition overlay (see js/transitions.js)
+   --------------------------------------------------------- */
+@keyframes page-transition-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes page-transition-out {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+
+/* ---------------------------------------------------------
+   Initial content fade-up (hero label/title, headings)
+   --------------------------------------------------------- */
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__label {
+  animation: fade-up-in var(--duration-slow) var(--ease-editorial) 0.15s both;
+}
+
+.hero__title {
+  animation: fade-up-in var(--duration-slow) var(--ease-editorial) 0.3s both;
+}
+
+/* ---------------------------------------------------------
+   Simple opacity fade, used for the body wrapper on first paint
+   --------------------------------------------------------- */
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+body {
+  animation: page-fade-in var(--duration-base) var(--ease-editorial) both;
+}
+
+/* ---------------------------------------------------------
+   Custom cursor micro-motion (opacity/scale only — no bounce)
+   --------------------------------------------------------- */
+@keyframes cursor-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------------------------------------------------------
+   Reduced motion — disable non-essential animation entirely
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__label,
+  .hero__title,
+  body {
+    animation: none !important;
+  }
+
+  .page-transition.is-active,
+  .page-transition.is-entering {
+    animation: none !important;
+    transition: none !important;
+  }
+}
