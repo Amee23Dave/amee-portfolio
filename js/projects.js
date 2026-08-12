@@ -88,7 +88,7 @@ export const PROJECTS = [
     category: { value: 'ai-ad-film', label: 'AI Ad Film' },
     year: 2026,
     duration: '00:20',
-    role: '3D Animation, Lighting & Editing',
+    role: 'Creative Direction, AI Filmmaking & Editing',
     tools: ['Blender', 'After Effects'],
     overview: [
       'Sculpted in Scent is a 3D product film created for a fictional perfume house, designed to function as a hero asset for a fragrance launch. The objective was to give an intangible product — scent — a physical, sculptural presence on screen.',
@@ -146,7 +146,7 @@ export const PROJECTS = [
     category: { value: 'ai-ad-film', label: 'AI Ad Film' },
     year: 2026,
     duration: '00:22',
-    role: '3D Animation, Art Direction & Editing',
+    role: 'Creative Direction, AI Filmmaking, Editing & Sound Design',
     tools: ['Blender', 'After Effects'],
     overview: [
       'Formed by Earth is a 3D product film created for a fictional ceramics studio, built to showcase a handmade-style homeware collection with the polish of a design-led product launch. The objective was to make digitally produced objects feel tactile and earthbound.',
@@ -170,61 +170,55 @@ export const PROJECTS = [
   {
     id: 6,
     number: '06',
-    slug: '3D-product-perfume-bottle',
-    title: 'Up Coming',
-    category: { value: '3d-product-film', label: '3D Product Film' },
-    year: 2026,
-    duration: '00:45',
-    role: 'Creative Direction, Editing & Sound Design',
-    tools: ['Premiere Pro', 'After Effects', 'AI Generation'],
-    overview: [
-      'Beyond the Frame is a brand story film created as a concept piece for a design-led studio, structured the way a founder-facing brand film might open a pitch or anniversary reel. The objective was to communicate a creative philosophy rather than sell a specific product.',
-      'It’s intended for an audience of collaborators and clients evaluating a studio’s point of view. The central idea moves between process and outcome — sketches, screens and finished work — to show craft as a continuous thread. The desired emotion is trust — the sense of being in capable, considered hands.'
-    ],
-    concept: 'Rather than presenting a single project, the film treats the studio’s process itself as the story, weaving fragments of work across disciplines into one continuous idea.',
-    visualDirection: 'A restrained, editorial visual language — generous negative space, uppercase typography and a single accent colour — mirrors the studio’s own design system throughout the film.',
-    cinematography: 'Camera work stays observational, favouring static and slow-drift shots of real process moments over staged, performative footage.',
-    production: 'Live-action style sequences were generated and refined through an AI-assisted pipeline, then composited with motion graphics to unify formats and pacing.',
-    editing: 'The edit interlaces short fragments rather than long scenes, held together by a single evolving sound bed that carries the film’s pacing from start to finish.',
-    poster: '/assets/posters/brand-story-poster.webp',
-    previewVideo: '/assets/videos/brand-story-film-preview.mp4',
-    fullVideo: '/assets/videos/brand-story-film-full.mp4',
-    gallery: [
-      { src: '/assets/images/brand-story-still-01.webp', alt: 'Brand story film — process still, wide shot', caption: 'Still 01 — Process' },
-      { src: '/assets/images/brand-story-still-02.webp', alt: 'Brand story film — vertical detail, work in progress', caption: 'Still 02 — In progress' },
-      { src: '/assets/images/brand-story-still-03.webp', alt: 'Brand story film — finished work, final frame', caption: 'Still 03 — Outcome' }
-    ],
-    disclaimer: true
-  },
-
-{
-    id: 7,
-    number: '07',
-    slug: '3D-product-perfume-bottle',
+    slug: '3d-product-perfume-bottle',
     title: '3D Product Perfume Bottle',
     category: { value: '3d-product-film', label: '3D Product Film' },
     year: 2026,
-    duration: '00:45',
-    role: 'Creative Direction, Editing & Sound Design',
-    tools: ['Premiere Pro', 'After Effects', 'AI Generation'],
+    // REPLACE: duration, role and tools below are placeholders — update with the real project details
+    duration: '00:00',
+    role: '3D Animation, Lighting & Editing',
+    tools: ['Blender', 'After Effects'],
+    // REPLACE: write real overview / process copy for this project when ready
     overview: [
-      'Beyond the Frame is a brand story film created as a concept piece for a design-led studio, structured the way a founder-facing brand film might open a pitch or anniversary reel. The objective was to communicate a creative philosophy rather than sell a specific product.',
-      'It’s intended for an audience of collaborators and clients evaluating a studio’s point of view. The central idea moves between process and outcome — sketches, screens and finished work — to show craft as a continuous thread. The desired emotion is trust — the sense of being in capable, considered hands.'
+      'A 3D product animation of a perfume bottle, created in Blender.'
     ],
-    concept: 'Rather than presenting a single project, the film treats the studio’s process itself as the story, weaving fragments of work across disciplines into one continuous idea.',
-    visualDirection: 'A restrained, editorial visual language — generous negative space, uppercase typography and a single accent colour — mirrors the studio’s own design system throughout the film.',
-    cinematography: 'Camera work stays observational, favouring static and slow-drift shots of real process moments over staged, performative footage.',
-    production: 'Live-action style sequences were generated and refined through an AI-assisted pipeline, then composited with motion graphics to unify formats and pacing.',
-    editing: 'The edit interlaces short fragments rather than long scenes, held together by a single evolving sound bed that carries the film’s pacing from start to finish.',
-    poster: '/assets/posters/brand-story-poster.webp',
-    previewVideo: '/assets/videos/brand-story-film-preview.mp4',
-    fullVideo: '/assets/videos/brand-story-film-full.mp4',
-    gallery: [
-      { src: '/assets/images/brand-story-still-01.webp', alt: 'Brand story film — process still, wide shot', caption: 'Still 01 — Process' },
-      { src: '/assets/images/brand-story-still-02.webp', alt: 'Brand story film — vertical detail, work in progress', caption: 'Still 02 — In progress' },
-      { src: '/assets/images/brand-story-still-03.webp', alt: 'Brand story film — finished work, final frame', caption: 'Still 03 — Outcome' }
+    concept: 'Overview and process copy for this project have not been written yet — replace this placeholder text.',
+    visualDirection: 'Replace this placeholder text with real visual direction notes.',
+    cinematography: 'Replace this placeholder text with real cinematography notes.',
+    production: 'Replace this placeholder text with real production notes.',
+    editing: 'Replace this placeholder text with real editing notes.',
+    poster: '/assets/posters/3D Product Perfume Bottle.webp',
+    previewVideo: '/assets/videos/Perfume Bottle.mp4',
+    fullVideo: '/assets/videos/Perfume Bottle.mp4',
+    gallery: [],
+    disclaimer: false
+  },
+
+  {
+    id: 7,
+    number: '07',
+    slug: '3d-bedroom-animation',
+    title: '3D Bedroom Animation',
+    category: { value: '3d-product-film', label: '3D Product Film' },
+    year: 2026,
+    // REPLACE: duration, role and tools below are placeholders — update with the real project details
+    duration: '00:00',
+    role: '3D Animation, Lighting & Editing',
+    tools: ['Blender', 'After Effects'],
+    // REPLACE: write real overview / process copy for this project when ready
+    overview: [
+      'A 3D bedroom interior animation, created in Blender.'
     ],
-    disclaimer: true
+    concept: 'Overview and process copy for this project have not been written yet — replace this placeholder text.',
+    visualDirection: 'Replace this placeholder text with real visual direction notes.',
+    cinematography: 'Replace this placeholder text with real cinematography notes.',
+    production: 'Replace this placeholder text with real production notes.',
+    editing: 'Replace this placeholder text with real editing notes.',
+    poster: '/assets/posters/3D Product Bedroom Animation.webp',
+    previewVideo: '/assets/videos/3D Product Animation.mp4',
+    fullVideo: '/assets/videos/3D Product Animation.mp4',
+    gallery: [],
+    disclaimer: false
   },
 
 ];

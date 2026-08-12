@@ -779,7 +779,7 @@ body[data-theme='light'] .filter-btn:focus-visible {
 }
 
 .project-tile__video.is-playing {
-  opacity: 1;
+  opacity: 0;
 }
 
 .project-tile__info {
@@ -2038,6 +2038,23 @@ body[data-theme='light'] .site-footer__credit {
     --header-height: 72px;
   }
 
+  /* -----------------------------------------
+     BASIC WIDTH FIX
+  ----------------------------------------- */
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
 
   .site-nav {
 
@@ -2091,6 +2108,7 @@ body[data-theme='light'] .site-footer__credit {
   .portfolio-project__info {
 
     min-height: auto;
+    
 
     padding:
       20px 0;
