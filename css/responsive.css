@@ -115,7 +115,9 @@
   }
 
   .about-lines__row,
-  .contact-row {
+  .contact-row,
+  .about-me .about-lines__row,
+  .about-me .contact-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.35rem;
   }

@@ -82,8 +82,15 @@
 # Clean URLs
 [[redirects]]
   from = "/about"
-  to = "/about.html"
-  status = 200
+  to = "/#about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about.html"
+  to = "/#about"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/work"

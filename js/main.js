@@ -121,7 +121,6 @@ function initActiveNav() {
   let key = null;
 
   if (path === '/' || path === '/index') key = 'home';
-  else if (path === '/about') key = 'about';
   else if (path === '/work' || path.startsWith('/projects/')) key = 'work';
 
   document.querySelectorAll('[data-nav-key]').forEach((link) => {

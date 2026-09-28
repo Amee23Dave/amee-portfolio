@@ -70,7 +70,7 @@
 
       <nav class="site-nav" aria-label="Primary">
         <a href="/index.html" class="site-nav__link" data-nav-key="home">Home<span class="site-nav__num" aria-hidden="true">01</span></a>
-        <a href="/about.html" class="site-nav__link" data-nav-key="about">About<span class="site-nav__num" aria-hidden="true">02</span></a>
+        <a href="#about" class="site-nav__link" data-nav-key="about">About<span class="site-nav__num" aria-hidden="true">02</span></a>
         <a href="/work.html" class="site-nav__link" data-nav-key="work">Work<span class="site-nav__num" aria-hidden="true">03</span></a>
         <a href="#contact" class="site-nav__link" data-nav-key="contact">Contact<span class="site-nav__num" aria-hidden="true">04</span></a>
       </nav>
@@ -89,7 +89,7 @@
     <nav aria-label="Mobile">
       <ul class="mobile-menu__list">
         <li><a href="/index.html" class="mobile-menu__link" data-nav-key="home"><span class="mobile-menu__num" aria-hidden="true">01</span>Home</a></li>
-        <li><a href="/about.html" class="mobile-menu__link" data-nav-key="about"><span class="mobile-menu__num" aria-hidden="true">02</span>About</a></li>
+        <li><a href="#about" class="mobile-menu__link" data-nav-key="about"><span class="mobile-menu__num" aria-hidden="true">02</span>About</a></li>
         <li><a href="/work.html" class="mobile-menu__link" data-nav-key="work"><span class="mobile-menu__num" aria-hidden="true">03</span>Work</a></li>
         <li><a href="#contact" class="mobile-menu__link" data-nav-key="contact"><span class="mobile-menu__num" aria-hidden="true">04</span>Contact</a></li>
       </ul>
@@ -188,8 +188,41 @@
         <div class="about-me__body reveal">
           <p class="label" id="about-me-heading">About me</p>
           <p class="about-me__text">I&rsquo;m Amee &mdash; an AI filmmaker and visual storyteller creating cinematic brand content through AI, 3D visualization, and creative direction.</p>
-          <p class="about-me__text">My work focuses on AI-generated ad films, 3D product films, and brand storytelling, combining strong visual concepts with cinematography, lighting, composition, editing, and sound.</p>
-          <a class="about-me__link" href="/about.html">More about me <svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+
+          <div class="about-lines">
+            <div class="about-lines__row">
+              <span class="about-lines__label">Services</span>
+              <span class="about-lines__value">AI Ad Films · 3D Product Films · Brand Films</span>
+            </div>
+            <div class="about-lines__row">
+              <span class="about-lines__label">Capabilities</span>
+              <span class="about-lines__value">AI Filmmaking · 3D Visualization · Creative Direction · Editing</span>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <div class="contact-row">
+              <span class="contact-row__label">Email</span>
+              <a class="contact-row__link" href="mailto:work.ameedave@email.com">
+                <span class="contact-row__value">work.ameedave@email.com</span>
+                <span class="contact-row__status"><svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span>
+              </a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-row__label">Instagram</span>
+              <a class="contact-row__link" href="https://www.instagram.com/ameedavedesign/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: @ameedavedesign (opens in a new tab)">
+                <span class="contact-row__value">@ameedavedesign</span>
+                <span class="contact-row__status"><svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span>
+              </a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-row__label">LinkedIn</span>
+              <a class="contact-row__link" href="https://www.linkedin.com/in/ameecreator/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn: ameecreator (opens in a new tab)">
+                <span class="contact-row__value">ameecreator</span>
+                <span class="contact-row__status"><svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -237,7 +270,7 @@
         <nav class="site-footer__nav" aria-label="Footer">
           <a href="/index.html">Home</a>
           <a href="/work.html">Work</a>
-          <a href="/about.html">About</a>
+          <a href="#about">About</a>
         </nav>
 
         <address class="site-footer__contact">

@@ -31,7 +31,6 @@
 .hero__name,
 .page-title__text,
 .project-hero__title,
-.about-hero__heading,
 .section-heading {
   animation: rise-in 0.9s var(--ease) 0.25s backwards;
 }
@@ -69,7 +68,6 @@
   .hero__name,
   .page-title__text,
   .project-hero__title,
-  .about-hero__heading,
   .section-heading,
   .hero__meta,
   .page-title__sub,

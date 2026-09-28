@@ -796,24 +796,20 @@ video {
   color: var(--text-muted);
 }
 
-.about-me__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 1.75rem;
-  font-family: var(--font-body);
-  font-size: var(--fs-label);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text);
-  border-bottom: 1px solid var(--line-strong);
-  padding-bottom: 0.3rem;
+/* Services / capabilities rows + contact rows inside the About section */
+.about-me .about-lines,
+.about-me .contact-list {
+  margin-top: clamp(2rem, 4vw, 3rem);
 }
 
-.about-me__link:hover,
-.about-me__link:focus-visible {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+.about-me .about-lines__row,
+.about-me .contact-row {
+  grid-template-columns: 9rem minmax(0, 1fr);
+}
+
+.about-me .contact-row__link {
+  padding-block: 1.1rem;
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
 }
 
 /* ---------------------------------------------------------
@@ -1148,31 +1144,8 @@ textarea.field__input {
 }
 
 /* ---------------------------------------------------------
-   17. ABOUT PAGE (content unchanged — theme only)
+   17. ABOUT ROWS + CONTACT ROWS (homepage About section)
    --------------------------------------------------------- */
-.about-hero {
-  padding-top: calc(var(--header-height) + clamp(3rem, 7vw, 6rem));
-  padding-bottom: clamp(3.5rem, 7vw, 6rem);
-}
-
-.about-hero__heading {
-  font-size: clamp(3rem, 7.5vw, 7.25rem);
-  line-height: 0.9;
-  max-width: 17ch;
-}
-
-.about-hero__intro {
-  margin-top: clamp(2rem, 4vw, 3rem);
-  max-width: 44rem;
-  font-size: var(--fs-lead);
-  line-height: 1.7;
-  color: var(--text-muted);
-}
-
-.about-hero__intro p + p {
-  margin-top: 1.25rem;
-}
-
 .about-lines {
   display: flex;
   flex-direction: column;
@@ -1202,23 +1175,6 @@ textarea.field__input {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text);
-}
-
-.contact {
-  padding-block: clamp(4rem, 8vw, 7rem);
-  border-top: 1px solid var(--line);
-}
-
-.contact__heading {
-  font-size: clamp(2.75rem, 6.2vw, 6rem);
-  line-height: 0.9;
-  max-width: 14ch;
-}
-
-.contact__availability {
-  margin-top: 1.25rem;
-  font-size: var(--fs-lead);
-  color: var(--text-muted);
 }
 
 .contact-list {

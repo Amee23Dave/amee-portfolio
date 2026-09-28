@@ -3,6 +3,16 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/about",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/#about",
+      "permanent": true
+    },
+    {
       "source": "/projects/luxury-watch-film",
       "destination": "/projects/badminton-women-player",
       "permanent": true

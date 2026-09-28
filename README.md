@@ -10,13 +10,13 @@ Hosted on **Vercel** (a matching `netlify.toml` is included if you ever move to 
 
 | Page | File | Live URL |
 |---|---|---|
-| Home — name, showreel, selected work, about me, contact form | `index.html` | `/` |
+| Home — headline, showreel, selected work, about me (services, capabilities, email / Instagram / LinkedIn), contact form | `index.html` | `/` |
 | Work — all projects + contact form | `work.html` | `/work` |
-| About & Contact | `about.html` | `/about` |
 | Project pages (7) | `projects/*.html` | `/projects/<name>` |
 | Privacy | `privacy.html` | `/privacy` |
 | 404 | `404.html` | any missing page |
 
+The old `/about` address now opens the About section on the homepage.
 Old project addresses (`luxury-watch-film`, `perfume-product-film`, `sportswear-ai-film`,
 `ceramic-product-film`, `brand-story-film`, `projects/portfolio`) automatically redirect to the
 correctly named pages. Their files in `/projects/` are only tiny redirect stubs.
@@ -27,7 +27,7 @@ correctly named pages. Their files in `/projects/` are only tiny redirect stubs.
 
 ```
 amee-portfolio/
-├── index.html, work.html, about.html, privacy.html, 404.html
+├── index.html, work.html, privacy.html, 404.html
 ├── projects/                 7 project pages (+ redirect stubs for old URLs)
 ├── css/
 │   ├── reset.css
