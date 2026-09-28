@@ -115,7 +115,7 @@ Save a portrait as `assets/images/amee-portrait.webp` (about 800 × 1000px). In 
 
 There is no server. When someone presses **Let's talk**, their own email app opens with a pre-filled
 message to `work.ameedave@email.com`. To change the address, edit `CONTACT_EMAIL` in `js/main.js`
-and the email links in the HTML files. Budget ranges and services are plain text in the form markup.
+and the email links in the HTML files. The form asks for name, email and project details.
 
 ---
 

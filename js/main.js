@@ -184,25 +184,14 @@ function initContactForm() {
     if (!form.reportValidity()) return;
 
     const data = new FormData(form);
-    const services = data.getAll('services');
-    if (!services.length) {
-      setStatus('Please choose at least one service.', true);
-      const firstChip = form.querySelector('input[name="services"]');
-      if (firstChip) firstChip.focus();
-      return;
-    }
-
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
-    const budget = String(data.get('budget') || 'Not specified');
     const details = String(data.get('details') || '').trim();
 
     const subject = `Project enquiry — ${name}`;
     const body = [
       `Name: ${name}`,
       `Email: ${email}`,
-      `Services: ${services.join(', ')}`,
-      `Budget: ${budget}`,
       '',
       'Project details:',
       details,
@@ -211,8 +200,6 @@ function initContactForm() {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setStatus(`Opening your email app… If nothing happens, write to ${CONTACT_EMAIL}.`);
   });
-
-  form.addEventListener('change', () => setStatus(''));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
