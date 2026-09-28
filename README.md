@@ -41,7 +41,7 @@ amee-portfolio/
 │   └── transitions.js        page transition overlay
 ├── assets/
 │   ├── work/                 ← web-optimised media actually used by the site
-│   ├── fonts/                self-hosted Bebas Neue, Manrope, DM Mono
+│   ├── fonts/                self-hosted Bebas Neue + Poppins
 │   ├── images/               og-image.jpg (social share image)
 │   ├── icons/                favicons
 │   ├── videos/, posters/     your original full-size files (not loaded by the site)
@@ -58,7 +58,7 @@ Edit the tokens at the top of `css/style.css`:
 
 - Background `#0e0e0e` (near-black), raised surfaces `#141414` / `#1a1a1a`
 - Text `#f1f0ec`, muted `#9a9a96`, accent `#e76f2e`
-- Fonts: **Bebas Neue** (headlines), **Manrope** (body), **DM Mono** (labels) — all self-hosted in `assets/fonts/`
+- Fonts: **Bebas Neue** (big headlines) and **Poppins** (navigation, text, labels, contact details) — both self-hosted in `assets/fonts/`
 
 ---
 
