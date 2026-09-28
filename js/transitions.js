@@ -1,68 +1,56 @@
 /* =========================================================
-   TRANSITIONS.JS
-   Full-screen page transition overlay.
-   - On load: overlay covers the screen, then exits upward to
-     reveal the page (a controlled, cinematic reveal — not a
-     spinner, not a bounce).
-   - On internal navigation: overlay rises to cover the screen,
-     then the browser navigates to the new URL.
-   prefers-reduced-motion is respected globally via the
-   animation-duration override in reset.css, so no separate
-   branching is required here.
+   TRANSITIONS.JS — full-screen page transition
+   The reveal on page load is pure CSS (see .page-transition),
+   so pages never stay covered. This script only adds the
+   "cover" motion when leaving a page, and clears it again if
+   the browser restores the page from its back/forward cache.
    ========================================================= */
 
-const TRANSITION_MS = 550;
+const LEAVE_DELAY = 420;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-function isInternalNavigableLink(link) {
+function isInternalPageLink(link) {
   if (!link || !link.href) return false;
   if (link.origin !== window.location.origin) return false;
-  if (link.target && link.target !== '' && link.target !== '_self') return false;
+  if (link.target && link.target !== '_self') return false;
   if (link.hasAttribute('download')) return false;
-  if (link.href.startsWith('mailto:') || link.href.startsWith('tel:')) return false;
+  if (/^(mailto|tel):/i.test(link.getAttribute('href') || '')) return false;
 
-  // Same-page anchor (e.g. jumping to #contact while already on about.html)
-  // should just scroll — no full-page transition needed.
-  if (link.pathname === window.location.pathname && link.hash) return false;
+  // Same page + hash → let the browser scroll instead
+  const samePath = link.pathname.replace(/\.html$/, '') === window.location.pathname.replace(/\.html$/, '');
+  if (samePath && link.hash) return false;
+
+  // Direct media files (e.g. "Download the film") open normally
+  if (/\.(mp4|webm|jpg|jpeg|png|webp|pdf)$/i.test(link.pathname)) return false;
 
   return true;
 }
 
-function initPageEnterTransition() {
-  const overlay = document.querySelector('[data-page-transition]');
-  if (!overlay) return;
-
-  // Wait one frame so the browser paints the covered state first,
-  // then trigger the upward reveal.
-  window.requestAnimationFrame(() => {
-    window.requestAnimationFrame(() => {
-      overlay.classList.add('is-revealing');
-    });
-  });
-}
-
-function initLinkTransitions() {
+function init() {
   const overlay = document.querySelector('[data-page-transition]');
   if (!overlay) return;
 
   document.addEventListener('click', (event) => {
-    if (event.defaultPrevented) return;
-    if (event.button !== 0) return;
+    if (event.defaultPrevented || event.button !== 0) return;
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
     const link = event.target.closest('a[href]');
-    if (!isInternalNavigableLink(link)) return;
+    if (!isInternalPageLink(link)) return;
+
+    if (reduceMotion.matches) return; // navigate instantly
 
     event.preventDefault();
-    overlay.classList.remove('is-revealing');
     overlay.classList.add('is-covering');
-
     window.setTimeout(() => {
       window.location.href = link.href;
-    }, TRANSITION_MS);
+    }, LEAVE_DELAY);
+  });
+
+  // Back/forward cache: the page comes back exactly as it was left,
+  // including the covering overlay — remove it so the page is visible.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) overlay.classList.remove('is-covering');
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initPageEnterTransition();
-  initLinkTransitions();
-});
+document.addEventListener('DOMContentLoaded', init);

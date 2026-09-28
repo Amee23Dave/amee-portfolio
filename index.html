@@ -3,44 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amee Dave — AI Filmmaker & Visual Storyteller</title>
-  <meta name="description" content="Amee Dave is an AI filmmaker and visual storyteller creating AI-generated ad films, 3D product films and brand films for luxury and lifestyle brands.">
+  <title>Amee Dave — AI Filmmaker &amp; Visual Storyteller</title>
+  <meta name="description" content="Amee Dave is an AI filmmaker and visual storyteller creating AI ad films, 3D product films and brand films.">
+  <meta name="theme-color" content="#0e0e0e">
 
-  <!-- REPLACE DOMAIN: swap https://www.ameedave.com for the final live domain everywhere in this file -->
+  <!-- REPLACE DOMAIN: swap https://www.ameedave.com for the final live domain in this file -->
   <link rel="canonical" href="https://www.ameedave.com/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Amee Dave">
-  <meta property="og:title" content="Amee Dave — AI Filmmaker & Visual Storyteller">
-  <meta property="og:description" content="AI-generated ad films, 3D product films and brand films. Selected work by Amee Dave.">
+  <meta property="og:title" content="Amee Dave — AI Filmmaker &amp; Visual Storyteller">
+  <meta property="og:description" content="Amee Dave is an AI filmmaker and visual storyteller creating AI ad films, 3D product films and brand films.">
   <meta property="og:url" content="https://www.ameedave.com/">
-  <!-- REPLACE IMAGE: swap for a final 1200x630 social share image once available -->
-  <meta property="og:image" content="https://www.ameedave.com/assets/images/Luxury-Fashion-Handbag_1.jpg">
-
-  <!-- Twitter Card -->
+  <meta property="og:image" content="https://www.ameedave.com/assets/images/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Amee Dave — AI Filmmaker & Visual Storyteller">
-  <meta name="twitter:description" content="AI-generated ad films, 3D product films and brand films. Selected work by Amee Dave.">
-  <meta name="twitter:image" content="https://www.ameedave.com/assets/images/og-default.jpg">
+  <meta name="twitter:title" content="Amee Dave — AI Filmmaker &amp; Visual Storyteller">
+  <meta name="twitter:description" content="Amee Dave is an AI filmmaker and visual storyteller creating AI ad films, 3D product films and brand films.">
+  <meta name="twitter:image" content="https://www.ameedave.com/assets/images/og-image.jpg">
 
-  <!-- Icons -->
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Fonts are self-hosted and preloaded so the headline never jumps on first load -->
+  <link rel="preload" href="/assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/work/showreel.webp" as="image" fetchpriority="high">
 
-  <!-- Styles -->
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/responsive.css">
 
-  <!-- Structured data: Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -61,24 +56,27 @@
   }
   </script>
 
-  <!-- Privacy-friendly analytics (Plausible) — insert once an account exists:
+  <!-- Privacy-friendly analytics (Plausible) — uncomment once an account exists:
   <script defer data-domain="www.ameedave.com" src="https://plausible.io/js/script.js"></script>
   -->
 </head>
-<body data-theme="dark">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="page-transition" data-page-transition aria-hidden="true"></div>
 
   <header class="site-header" data-site-header>
     <div class="container site-header__inner">
-      <a href="/index.html" class="site-header__logo">Amee Dave</a>
+      <a href="/index.html" class="site-logo" aria-label="Amee Dave — home">Amee. D</a>
 
-      <nav class="site-header__nav" aria-label="Primary">
-        <a href="/projects/portfolio.html" class="site-header__nav-link" data-nav-key="work">Work</a>
-        <a href="/about.html" class="site-header__nav-link" data-nav-key="about">About</a>
-        <!--<a href="/about.html#contact" class="site-header__nav-link" data-nav-key="contact">Contact</a>-->
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/index.html" class="site-nav__link" data-nav-key="home">Home<span class="site-nav__num" aria-hidden="true">01</span></a>
+        <a href="/about.html" class="site-nav__link" data-nav-key="about">About<span class="site-nav__num" aria-hidden="true">02</span></a>
+        <a href="/work.html" class="site-nav__link" data-nav-key="work">Work<span class="site-nav__num" aria-hidden="true">03</span></a>
+        <a href="#contact" class="site-nav__link" data-nav-key="contact">Contact<span class="site-nav__num" aria-hidden="true">04</span></a>
       </nav>
+
+      <a href="#contact" class="site-header__cta">Let&rsquo;s talk <svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
 
       <button type="button" class="site-header__menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
         <span class="is-closed-label">Menu</span>
@@ -88,20 +86,13 @@
   </header>
 
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
-    <button
-      class="mobile-menu__close"
-      type="button"
-      data-menu-close
-      aria-label="Close menu"
-    >
-      &times;
-    </button>
-
+    <button class="mobile-menu__close" type="button" data-menu-close aria-label="Close menu">&times;</button>
     <nav aria-label="Mobile">
       <ul class="mobile-menu__list">
-        <li><a href="/projects/portfolio.html" class="mobile-menu__link" data-nav-key="work">Work</a></li>
-        <li><a href="/about.html" class="mobile-menu__link" data-nav-key="about">About</a></li>
-        <!--<li><a href="/about.html#contact" class="mobile-menu__link" data-nav-key="contact">Contact</a></li>-->
+        <li><a href="/index.html" class="mobile-menu__link" data-nav-key="home"><span class="mobile-menu__num" aria-hidden="true">01</span>Home</a></li>
+        <li><a href="/about.html" class="mobile-menu__link" data-nav-key="about"><span class="mobile-menu__num" aria-hidden="true">02</span>About</a></li>
+        <li><a href="/work.html" class="mobile-menu__link" data-nav-key="work"><span class="mobile-menu__num" aria-hidden="true">03</span>Work</a></li>
+        <li><a href="#contact" class="mobile-menu__link" data-nav-key="contact"><span class="mobile-menu__num" aria-hidden="true">04</span>Contact</a></li>
       </ul>
     </nav>
     <div class="mobile-menu__meta">
@@ -111,181 +102,223 @@
   </div>
 
   <main id="main">
-    <section class="hero" aria-label="Showreel">
-      <div class="hero__media">
-        <img
-          class="hero__poster"
-          src="/assets/posters/showreel-poster.webp"
-          alt=""
-          data-fallback-text="Showreel — poster image placeholder, replace in /assets/posters/"
-        >
+    <section class="hero container" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="fit-title hero__name"><span class="fit-title__text">Amee Dave</span></h1>
 
-        <!-- REPLACE VIDEO: swap the sources below for the final graded showreel export -->
-        <video
-          class="hero__video"
-          data-hero-video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/assets/posters/showreel-poster.webp"
-          aria-hidden="true"
-        >
-          <source src="/assets/videos/Main_Header_Video.mp4" type="video/webm">
-          <source src="/assets/videos/Main_Header_Video.mp4" type="video/mp4">
-        </video>
-
-        <div class="hero__scrim" aria-hidden="true"></div>
-
-        <div class="hero__fallback" data-hero-fallback>
-          <p class="hero__fallback-text">The showreel preview is currently unavailable. Please check back shortly.</p>
-        </div>
+      <div class="hero__meta">
+        <p class="hero__intro"><strong>AI Filmmaker &amp; Visual Storyteller.</strong><br>AI ad films, 3D product films and brand films.</p>
+        <p class="hero__year">Portfolio &copy; 2026</p>
       </div>
 
-      <div class="hero__content">
-        <p class="hero__label">AI Filmmaker &amp; Visual Storyteller</p>
-        <h1 class="hero__title">Amee Dave</h1>
+      <!-- SHOWREEL: replace /assets/work/showreel.mp4 + showreel.webp to update -->
+      <div class="reel">
+        <img class="reel__poster" src="/assets/work/showreel.webp" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
+        <video class="reel__video" data-reel autoplay muted loop playsinline preload="auto" poster="/assets/work/showreel.webp" aria-label="Amee Dave showreel">
+          <source src="/assets/work/showreel.mp4" type="video/mp4">
+        </video>
+        <span class="reel__shade" aria-hidden="true"></span>
+        <span class="reel__tag">&copy;2026</span>
+        <p class="reel__title">Showreel</p>
       </div>
     </section>
 
-    <section class="work section" id="work" aria-labelledby="work-heading">
-      <div class="container">
-        <div class="work__header">
-          <div class="work__title-row reveal">
-            <h2 id="work-heading" class="section-heading">Selected Work</h2>
-          </div>
+    <section class="work container" aria-labelledby="work-heading">
+      <h2 id="work-heading" class="visually-hidden">Selected work</h2>
+        <div class="work-grid">
+          <a class="work-card" href="/projects/mercedes-live-your-signature.html" data-work-card data-slug="mercedes-live-your-signature" aria-label="Mercedes — Live Your Signature — AI Ad Film, 2026">
+            <span class="work-card__media">
+              <img class="work-card__img" src="/assets/work/mercedes-live-your-signature.webp" alt="Mercedes-Maybach S-Class driving through a forest road, aerial view" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" data-fallback-text="Mercedes — Live Your Signature">
+            </span>
+            <span class="work-card__shade" aria-hidden="true"></span>
+            <span class="work-card__year">&copy;2026</span>
+            <h3 class="work-card__title">Mercedes — Live Your Signature</h3>
+          </a>
 
-          <div class="filter-group reveal" data-filter-group role="group" aria-label="Filter projects by category">
-            <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
-            <button type="button" class="filter-btn" data-filter="ai-ad-film" aria-pressed="false">AI Ad Films</button>
-            <button type="button" class="filter-btn" data-filter="3d-product-film" aria-pressed="false">3D Product Films</button>
-            <button type="button" class="filter-btn" data-filter="brand-film" aria-pressed="false">Brand Films</button>
-          </div>
-          <p class="visually-hidden" role="status" aria-live="polite" data-filter-status>Showing 6 projects</p>
+          <a class="work-card" href="/projects/badminton-women-player.html" data-work-card data-slug="badminton-women-player" aria-label="Badminton Women Player — AI Ad Film, 2026">
+            <span class="work-card__media">
+              <img class="work-card__img" src="/assets/work/badminton-women-player.webp" alt="Badminton player celebrating on court with her racket raised" width="1600" height="900" loading="eager" fetchpriority="high" decoding="async" data-fallback-text="Badminton Women Player">
+            </span>
+            <span class="work-card__shade" aria-hidden="true"></span>
+            <span class="work-card__year">&copy;2026</span>
+            <h3 class="work-card__title">Badminton Women Player</h3>
+          </a>
+
+          <a class="work-card work-card--wide" href="/projects/aqua-hydration-serum.html" data-work-card data-slug="aqua-hydration-serum" aria-label="Aqua Hydration Serum — AI Ad Film, 2026">
+            <span class="work-card__media">
+              <img class="work-card__img" src="/assets/work/aqua-hydration-serum.webp" alt="Aqua Hydration Serum bottle on a stone surface in soft daylight" width="1600" height="900" loading="lazy" decoding="async" data-fallback-text="Aqua Hydration Serum">
+            </span>
+            <span class="work-card__shade" aria-hidden="true"></span>
+            <span class="work-card__year">&copy;2026</span>
+            <h3 class="work-card__title">Aqua Hydration Serum</h3>
+          </a>
+
+          <a class="work-card" href="/projects/mahalaxmi-tea-masala.html" data-work-card data-slug="mahalaxmi-tea-masala" aria-label="Mahalaxmi Tea Masala — AI Ad Film, 2026">
+            <span class="work-card__media">
+              <img class="work-card__img" src="/assets/work/mahalaxmi-tea-masala.webp" alt="Mahalaxmi Tea Masala box on a kitchen counter with spices and tea" width="1600" height="900" loading="lazy" decoding="async" data-fallback-text="Mahalaxmi Tea Masala">
+            </span>
+            <span class="work-card__shade" aria-hidden="true"></span>
+            <span class="work-card__year">&copy;2026</span>
+            <h3 class="work-card__title">Mahalaxmi Tea Masala</h3>
+          </a>
+
+          <a class="work-card" href="/projects/e-motorad-electric-cycle.html" data-work-card data-slug="e-motorad-electric-cycle" aria-label="E-Motorad Electric Cycle — AI Ad Film, 2026">
+            <span class="work-card__media">
+              <img class="work-card__img" src="/assets/work/e-motorad-electric-cycle.webp" alt="Cyclist riding a red E-Motorad electric cycle at sunset" width="1600" height="900" loading="lazy" decoding="async" data-fallback-text="E-Motorad Electric Cycle">
+            </span>
+            <span class="work-card__shade" aria-hidden="true"></span>
+            <span class="work-card__year">&copy;2026</span>
+            <h3 class="work-card__title">E-Motorad Electric Cycle</h3>
+          </a>
+        </div>
+      <div class="work__more">
+        <a class="btn btn--ghost" href="/work.html">All projects (07) <svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+      </div>
+    </section>
+
+    <section class="about-me container" id="about" aria-labelledby="about-me-heading">
+      <div class="about-me__grid">
+        <div class="about-me__portrait about-me__portrait--placeholder reveal">
+          <!-- REPLACE: add your portrait as /assets/images/amee-portrait.webp, uncomment the img below
+               and remove the "about-me__portrait--placeholder" class above:
+          <img src="/assets/images/amee-portrait.webp" alt="Portrait of Amee Dave" width="800" height="1000" loading="lazy">
+          -->
+          <span class="about-me__monogram" aria-hidden="true">AD</span>
+          <span class="about-me__caption">Amee Dave &middot; Gujarat, IN</span>
         </div>
 
-        <div class="project-grid">
+        <div class="about-me__body reveal">
+          <p class="label" id="about-me-heading">About me</p>
+          <p class="about-me__text">I&rsquo;m Amee &mdash; an AI filmmaker and visual storyteller creating cinematic brand content through AI, 3D visualization, and creative direction.</p>
+          <p class="about-me__text">My work focuses on AI-generated ad films, 3D product films, and brand storytelling, combining strong visual concepts with cinematography, lighting, composition, editing, and sound.</p>
+          <a class="about-me__link" href="/about.html">More about me <svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
 
-          <!-- Project 01 -->
-          <article class="project-tile reveal" data-project-tile data-slug="mercedes-live-your-signature" data-category="ai-ad-film">
-            <a href="/projects/mercedes-live-your-signature.html" class="project-tile__frame" aria-label="View project: Mercedes — Live Your Signature, AI Ad Film, 2026">
-              <img class="project-tile__poster" src="/assets/posters/mercedes-maybach.webp" alt="Mercedes concept film, Live Your Signature — key still" loading="lazy" data-fallback-text="Mercedes — Live Your Signature — preview image">
-            </a>
-            <div class="project-tile__info">
-              <span class="project-tile__id">01</span>
-              <div class="project-tile__heading">
-                <h3 class="project-tile__title">Mercedes — Live Your Signature</h3>
-              </div>
-              <span class="project-tile__meta">AI Ad Film · 2026</span>
+          <div class="about-me__lists">
+            <div class="spec-list">
+              <p class="label">Services</p>
+              <ul class="spec-list__items">
+                <li>AI Ad Films</li>
+                <li>3D Product Films</li>
+                <li>Brand Films</li>
+                <li>Reel Editing</li>
+              </ul>
             </div>
-          </article>
-
-          <!-- Project 02 -->
-          <article class="project-tile reveal" data-project-tile data-slug="luxury-watch-film" data-category="ai-ad-film">
-            <a href="/projects/luxury-watch-film.html" class="project-tile__frame" aria-label="View project: The Signature of Time, AI Ad Film, 2026">
-              <img class="project-tile__poster" src="/assets/posters/badminton-women-player.webp" alt="Luxury watch concept film, The Signature of Time — key still" loading="lazy" data-fallback-text="The Signature of Time — preview image">
-            </a>
-            <div class="project-tile__info">
-              <span class="project-tile__id">02</span>
-              <div class="project-tile__heading">
-                <h3 class="project-tile__title">Badminton Women Player</h3>
-              </div>
-              <span class="project-tile__meta">AI Ad Film · 2026</span>
+            <div class="spec-list">
+              <p class="label">Capabilities</p>
+              <ul class="spec-list__items">
+                <li>AI Filmmaking</li>
+                <li>3D Visualization</li>
+                <li>Creative Direction</li>
+                <li>Editing</li>
+              </ul>
             </div>
-          </article>
-
-          <!-- Project 03 -->
-          <article class="project-tile reveal" data-project-tile data-slug="perfume-product-film" data-category="3d-product-film">
-            <a href="/projects/perfume-product-film.html" class="project-tile__frame" aria-label="View project: Sculpted in Scent, 3D Product Film, 2026">
-              <img class="project-tile__poster" src="/assets/posters/Aqua-Hydration-Serum.webp" alt="Perfume 3D product film, Sculpted in Scent — key still" loading="lazy" data-fallback-text="Sculpted in Scent — preview image">
-            </a>
-            <div class="project-tile__info">
-              <span class="project-tile__id">03</span>
-              <div class="project-tile__heading">
-                <h3 class="project-tile__title">Aqua Hydration Serum</h3>
-              </div>
-              <span class="project-tile__meta">AI Ad Film · 2026</span>
+            <div class="spec-list">
+              <p class="label">Tools</p>
+              <ul class="spec-list__items">
+                <li>Blender</li>
+                <li>After Effects</li>
+                <li>AI Generation</li>
+              </ul>
             </div>
-          </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Project 04 -->
-          <article class="project-tile reveal" data-project-tile data-slug="sportswear-ai-film" data-category="ai-ad-film">
-            <a href="/projects/sportswear-ai-film.html" class="project-tile__frame" aria-label="View project: Built for Motion, AI Ad Film, 2026">
-              <img class="project-tile__poster" src="/assets/posters/Mahalaxmi-Tea-Masala-Powder.webp" alt="Sportswear concept film, Built for Motion — key still" loading="lazy" data-fallback-text="Built for Motion — preview image">
-            </a>
-            <div class="project-tile__info">
-              <span class="project-tile__id">04</span>
-              <div class="project-tile__heading">
-                <h3 class="project-tile__title">Mahalaxmi Spices Masala</h3>
-              </div>
-              <span class="project-tile__meta">AI Ad Film · 2026</span>
-            </div>
-          </article>
-
-          <!-- Project 05 -->
-         <!--<article class="project-tile reveal" data-project-tile data-slug="ceramic-product-film" data-category="3d-product-film">
-            <a href="/projects/ceramic-product-film.html" class="project-tile__frame" aria-label="View project: Formed by Earth, 3D Product Film, 2026">
-              <img class="project-tile__poster" src="/assets/posters/Electric-Cycle-Video.webp" alt="Ceramics 3D product film, Formed by Earth — key still" loading="lazy" data-fallback-text="Formed by Earth — preview image">
-            </a>
-            <div class="project-tile__info">
-              <span class="project-tile__id">05</span>
-              <div class="project-tile__heading">
-                <h3 class="project-tile__title">Formed by Earth</h3>
-              </div>
-              <span class="project-tile__meta">3D Product Film · 2026</span>
-            </div>
-          </article>-->
-
-          <!-- Project 06 -->
-          <!--<article class="project-tile reveal" data-project-tile data-slug="brand-story-film" data-category="brand-film">
-            <a href="/projects/brand-story-film.html" class="project-tile__frame" aria-label="View project: Beyond the Frame, Brand Film, 2026">
-              <img class="project-tile__poster" src="/assets/posters/brand-story-poster.webp" alt="Brand story film, Beyond the Frame — key still" loading="lazy" data-fallback-text="Beyond the Frame — preview image">
-            </a>
-            <div class="project-tile__info">
-              <span class="project-tile__id">06</span>
-              <div class="project-tile__heading">
-                <h3 class="project-tile__title">Beyond the Frame</h3>
-              </div>
-              <span class="project-tile__meta">Brand Film · 2026</span>
-            </div>
-          </article>-->
-
+    <section class="cta container" id="contact" aria-labelledby="cta-heading">
+      <div class="cta__head reveal">
+        <p class="label">Call to action</p>
+        <div>
+          <h2 id="cta-heading" class="cta__title">Let&rsquo;s start<br>creating together</h2>
+          <p class="cta__lead">Open to freelance collaborations and creative partnerships. Share a few details below &mdash; your email app will open with the message ready to send.</p>
         </div>
       </div>
 
-   <!-- PORTFOLIO BUTTON -->
+      <form class="cta-form reveal" data-contact-form action="mailto:work.ameedave@email.com" method="post" enctype="text/plain">
+        <div class="field">
+          <label class="field__label" for="cf-name">Your name <abbr title="required">*</abbr></label>
+          <input class="field__input" id="cf-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required>
+        </div>
 
-       <div class="portfolio-button-wrap">
+        <div class="field">
+          <label class="field__label" for="cf-email">Email <abbr title="required">*</abbr></label>
+          <input class="field__input" id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+        </div>
 
-    <a href="/projects/portfolio.html" class="portfolio-button">
+        <fieldset class="field">
+          <legend class="field__label">Services <abbr title="required">*</abbr></legend>
+          <div class="chip-group">
+            <span class="chip"><input class="chip__input" type="checkbox" id="cf-svc-0" name="services" value="AI Ad Film"><label class="chip__label" for="cf-svc-0">AI Ad Film</label></span>
+            <span class="chip"><input class="chip__input" type="checkbox" id="cf-svc-1" name="services" value="3D Product Film"><label class="chip__label" for="cf-svc-1">3D Product Film</label></span>
+            <span class="chip"><input class="chip__input" type="checkbox" id="cf-svc-2" name="services" value="Brand Film"><label class="chip__label" for="cf-svc-2">Brand Film</label></span>
+            <span class="chip"><input class="chip__input" type="checkbox" id="cf-svc-3" name="services" value="Reel Editing"><label class="chip__label" for="cf-svc-3">Reel Editing</label></span>
+          </div>
+        </fieldset>
 
-      <span>VIEW FULL PORTFOLIO</span>
+        <fieldset class="field">
+          <legend class="field__label">Budget (USD)</legend>
+          <div class="chip-group">
+            <span class="chip"><input class="chip__input" type="radio" id="cf-bud-0" name="budget" value="Under $1K"><label class="chip__label" for="cf-bud-0">Under $1K</label></span>
+            <span class="chip"><input class="chip__input" type="radio" id="cf-bud-1" name="budget" value="$1K – $3K"><label class="chip__label" for="cf-bud-1">$1K – $3K</label></span>
+            <span class="chip"><input class="chip__input" type="radio" id="cf-bud-2" name="budget" value="$3K – $5K"><label class="chip__label" for="cf-bud-2">$3K – $5K</label></span>
+            <span class="chip"><input class="chip__input" type="radio" id="cf-bud-3" name="budget" value="$5K – $10K"><label class="chip__label" for="cf-bud-3">$5K – $10K</label></span>
+            <span class="chip"><input class="chip__input" type="radio" id="cf-bud-4" name="budget" value="$10K+"><label class="chip__label" for="cf-bud-4">$10K+</label></span>
+            <span class="chip"><input class="chip__input" type="radio" id="cf-bud-5" name="budget" value="Not sure yet"><label class="chip__label" for="cf-bud-5">Not sure yet</label></span>
+          </div>
+        </fieldset>
 
-      <span class="portfolio-button__arrow">
-        →
-      </span>
+        <div class="field field--full">
+          <label class="field__label" for="cf-details">Project details <abbr title="required">*</abbr></label>
+          <textarea class="field__input" id="cf-details" name="details" rows="4" placeholder="Tell me about the product, the idea and your timeline." required></textarea>
+        </div>
 
-    </a>
-
-  </div>
-
+        <div class="cta-form__actions">
+          <button type="submit" class="btn">Let&rsquo;s talk <span class="btn__icon"><svg class="icon-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></span></button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </div>
+      </form>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <div>
-        <a href="mailto:work.ameedave@email.com">work.ameedave@email.com</a>
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <a class="site-footer__email" href="mailto:work.ameedave@email.com">work.ameedave@email.com</a>
+          <p class="site-footer__social">
+            <a href="https://www.instagram.com/ameedavedesign/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (opens in a new tab)">IG</a>
+            <span aria-hidden="true">/</span>
+            <a href="https://www.linkedin.com/in/ameecreator/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">LI</a>
+          </p>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <a href="/index.html">Home</a>
+          <a href="/work.html">Work</a>
+          <a href="/about.html">About</a>
+          <a href="#contact">Contact</a>
+          <a href="/privacy.html">Privacy</a>
+        </nav>
+
+        <address class="site-footer__contact">
+          <a href="mailto:work.ameedave@email.com">work.ameedave@email.com</a>
+          <a href="https://www.instagram.com/ameedavedesign/" target="_blank" rel="noopener noreferrer">@ameedavedesign</a>
+          <span>Gujarat, India</span>
+        </address>
       </div>
-      <span class="site-footer__location">Gujarat · IN</span>
-      <span class="site-footer__credit">Amee Dave · © 2026</span>
+
+      <div class="site-footer__mark fit-title" aria-hidden="true">
+        <span class="fit-title__text">Amee Dave</span>
+      </div>
+
+      <div class="site-footer__bottom">
+        <span>&copy; 2026 Amee Dave. All rights reserved.</span>
+        <a href="/privacy.html">Privacy</a>
+      </div>
     </div>
   </footer>
 
   <script type="module" src="/js/transitions.js"></script>
-  <script type="module" src="/js/projects.js"></script>
-  <script type="module" src="/js/video-controller.js"></script>
   <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/video-controller.js"></script>
 </body>
 </html>

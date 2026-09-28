@@ -1,39 +1,40 @@
 /* =========================================================
-   MAIN.JS
-   Site-wide behaviour shared by every page:
-   - header show/hide on scroll
-   - refined full-screen mobile menu
+   MAIN.JS — site-wide behaviour
+   - header hides on scroll down, returns on scroll up
+   - full-screen mobile menu (focus trap, Esc, close button)
    - active navigation state
-   - scroll-triggered "reveal" animation for sections
    - styled fallback for any image that fails to load
+   - contact form → opens the visitor's email app (no backend)
    ========================================================= */
 
+const CONTACT_EMAIL = 'work.ameedave@email.com';
+
 /* ---------------------------------------------------------
-   HEADER — hide on scroll down, reveal on scroll up
+   HEADER
    --------------------------------------------------------- */
 function initHeaderScroll() {
   const header = document.querySelector('[data-site-header]');
   if (!header) return;
 
-  let lastScrollY = window.scrollY;
+  let lastY = window.scrollY;
   let ticking = false;
-  const hideThreshold = 96;
 
-  function update() {
-    const currentScrollY = window.scrollY;
+  const update = () => {
+    const y = window.scrollY;
+    header.classList.toggle('has-scrolled', y > 8);
 
-    header.classList.toggle('has-scrolled', currentScrollY > 8);
-
-    if (currentScrollY > hideThreshold && currentScrollY > lastScrollY) {
+    const menuOpen = document.body.classList.contains('no-scroll');
+    if (!menuOpen && y > 120 && y > lastY + 2) {
       header.classList.add('is-hidden');
-    } else if (currentScrollY < lastScrollY) {
+    } else if (y < lastY - 2 || y <= 120) {
       header.classList.remove('is-hidden');
     }
 
-    lastScrollY = currentScrollY;
+    lastY = y;
     ticking = false;
-  }
+  };
 
+  update();
   window.addEventListener('scroll', () => {
     if (!ticking) {
       window.requestAnimationFrame(update);
@@ -43,23 +44,44 @@ function initHeaderScroll() {
 }
 
 /* ---------------------------------------------------------
-   MOBILE MENU — refined full-screen panel (no hamburger morph)
+   MOBILE MENU
    --------------------------------------------------------- */
 function initMobileMenu() {
   const toggle = document.querySelector('[data-menu-toggle]');
   const menu = document.querySelector('[data-mobile-menu]');
-  const closeButton = menu?.querySelector('[data-menu-close]');
   if (!toggle || !menu) return;
 
-  const focusableSelector = 'a[href], button:not([disabled])';
+  const closeButton = menu.querySelector('[data-menu-close]');
+  const focusable = () => Array.from(menu.querySelectorAll('a[href], button:not([disabled])'));
+
+  function onKeydown(event) {
+    if (event.key === 'Escape') {
+      closeMenu();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+
+    const items = focusable();
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 
   function openMenu() {
     menu.classList.add('is-open');
     toggle.setAttribute('aria-expanded', 'true');
     document.body.classList.add('no-scroll');
-    const firstLink = menu.querySelector(focusableSelector);
-    if (firstLink) firstLink.focus();
     document.addEventListener('keydown', onKeydown);
+    const firstLink = menu.querySelector('.mobile-menu__link');
+    if (firstLink) firstLink.focus();
   }
 
   function closeMenu({ returnFocus = true } = {}) {
@@ -70,135 +92,133 @@ function initMobileMenu() {
     if (returnFocus) toggle.focus();
   }
 
-  function onKeydown(event) {
-    if (event.key === 'Escape') {
-      closeMenu();
-      return;
-    }
-
-    // Simple focus trap while the menu is open
-    if (event.key === 'Tab') {
-      const focusable = Array.from(menu.querySelectorAll(focusableSelector));
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
-  }
-
   toggle.addEventListener('click', () => {
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-    if (isOpen) {
+    if (toggle.getAttribute('aria-expanded') === 'true') {
       closeMenu();
     } else {
       openMenu();
     }
   });
 
-  if (closeButton) {
-  closeButton.addEventListener('click', () => {
-    closeMenu();
-  });
-}
+  if (closeButton) closeButton.addEventListener('click', () => closeMenu());
 
   menu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => closeMenu({ returnFocus: false }));
   });
-}
 
-/* ---------------------------------------------------------
-   ACTIVE NAVIGATION STATE
-   --------------------------------------------------------- */
-function initActiveNav() {
-  const path = window.location.pathname;
-  const hash = window.location.hash;
-  const links = document.querySelectorAll('[data-nav-key]');
-  if (!links.length) return;
-
-  let matchKey = null;
-
-  /* WORK
-     Homepage
-     Portfolio page
-     Individual project pages
-  */
-
-  if (path === '/' || path.endsWith('/portfolio.html') || path.startsWith('/projects/')) {
-    matchKey = 'work';
-  } else if (path.endsWith('/about.html')) {
-    /*matchKey = hash === '#contact' ? 'contact' : 'about';*/
-    matchKey = 'about';
-  }
-
-  links.forEach((link) => {
-    const isActive = link.dataset.navKey === matchKey;
-    link.classList.toggle('is-active', isActive);
-    if (isActive) {
-      link.setAttribute('aria-current', 'page');
-    } else {
-      link.removeAttribute('aria-current');
-    }
+  // If the window grows past the mobile breakpoint, make sure the page can scroll
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
+    if (event.matches && menu.classList.contains('is-open')) closeMenu({ returnFocus: false });
   });
 }
-  document.addEventListener('DOMContentLoaded', () => {
-  initActiveNav();
-});
-
 
 /* ---------------------------------------------------------
-   SCROLL REVEAL — sections fade upward into view once
+   ACTIVE NAVIGATION
+   Works with or without ".html" (Vercel serves clean URLs)
    --------------------------------------------------------- */
-function initScrollReveal() {
-  const items = document.querySelectorAll('.reveal');
-  if (!items.length) return;
+function initActiveNav() {
+  const path = window.location.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+  let key = null;
 
-  if (!('IntersectionObserver' in window)) {
-    items.forEach((item) => item.classList.add('is-visible'));
-    return;
-  }
+  if (path === '/' || path === '/index') key = 'home';
+  else if (path === '/about') key = 'about';
+  else if (path === '/work' || path.startsWith('/projects/')) key = 'work';
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-  items.forEach((item) => observer.observe(item));
+  document.querySelectorAll('[data-nav-key]').forEach((link) => {
+    const active = link.dataset.navKey === key;
+    link.classList.toggle('is-active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
 }
 
 /* ---------------------------------------------------------
-   IMAGE FALLBACK — styled block instead of a broken-image icon
-   Applies to any <img> that opts in with [data-fallback-text]
+   IMAGE FALLBACK
+   Handles errors that happen after this script runs AND images
+   that had already failed before it loaded.
    --------------------------------------------------------- */
+function applyFallback(img) {
+  if (img.dataset.fallbackApplied) return;
+  img.dataset.fallbackApplied = 'true';
+  const block = document.createElement('span');
+  block.className = 'media-fallback';
+  const text = document.createElement('span');
+  text.className = 'media-fallback__text';
+  text.textContent = img.dataset.fallbackText || '';
+  block.appendChild(text);
+  img.replaceWith(block);
+}
+
 function initImageFallbacks() {
   document.addEventListener('error', (event) => {
     const target = event.target;
-    if (!(target instanceof HTMLImageElement)) return;
-    if (!target.hasAttribute('data-fallback-text')) return;
-    if (target.dataset.fallbackApplied) return;
-
-    target.dataset.fallbackApplied = 'true';
-    const fallback = document.createElement('div');
-    fallback.className = 'media-fallback';
-    fallback.innerHTML = `<span class="media-fallback__text">${target.dataset.fallbackText}</span>`;
-    target.replaceWith(fallback);
+    if (target instanceof HTMLImageElement && target.hasAttribute('data-fallback-text')) {
+      applyFallback(target);
+    }
   }, true);
+
+  document.querySelectorAll('img[data-fallback-text]').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) applyFallback(img);
+  });
+}
+
+/* ---------------------------------------------------------
+   CONTACT FORM
+   No server needed: builds a pre-filled email and opens the
+   visitor's email app. Change CONTACT_EMAIL above if needed.
+   --------------------------------------------------------- */
+function initContactForm() {
+  const form = document.querySelector('[data-contact-form]');
+  if (!form) return;
+
+  const status = form.querySelector('[data-form-status]');
+  const setStatus = (message, isError = false) => {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.toggle('is-error', isError);
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const services = data.getAll('services');
+    if (!services.length) {
+      setStatus('Please choose at least one service.', true);
+      const firstChip = form.querySelector('input[name="services"]');
+      if (firstChip) firstChip.focus();
+      return;
+    }
+
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const budget = String(data.get('budget') || 'Not specified');
+    const details = String(data.get('details') || '').trim();
+
+    const subject = `Project enquiry — ${name}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Services: ${services.join(', ')}`,
+      `Budget: ${budget}`,
+      '',
+      'Project details:',
+      details,
+    ].join('\n');
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus(`Opening your email app… If nothing happens, write to ${CONTACT_EMAIL}.`);
+  });
+
+  form.addEventListener('change', () => setStatus(''));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initMobileMenu();
   initActiveNav();
-  initScrollReveal();
   initImageFallbacks();
+  initContactForm();
 });

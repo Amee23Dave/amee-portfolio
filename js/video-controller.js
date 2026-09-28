@@ -1,51 +1,61 @@
 /* =========================================================
    VIDEO-CONTROLLER.JS
-   Handles every video-related interaction:
-   - hero showreel autoplay + fallback messaging
-   - project tile hover-to-play previews (hover-capable only)
+   - homepage showreel (fades in only once it can actually play)
+   - hover-to-play previews on work cards (mouse devices only)
    - custom "VIEW" cursor that follows the pointer
-   All preview video sources are read from js/projects.js so
-   there is a single place to update media paths.
+   Preview paths come from js/projects.js.
    ========================================================= */
 
 import { PROJECTS } from './projects.js';
 
 const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------------------------------------------------------
-   HERO SHOWREEL
+   SHOWREEL
    --------------------------------------------------------- */
-function initHeroVideo() {
-  const video = document.querySelector('[data-hero-video]');
-  const fallback = document.querySelector('[data-hero-fallback]');
+function initShowreel() {
+  const video = document.querySelector('[data-reel]');
   if (!video) return;
 
-  const showFallback = () => {
-    video.style.display = 'none';
-    if (fallback) fallback.classList.add('is-visible');
+  const markReady = () => video.classList.add('is-ready');
+
+  if (reduceMotion) {
+    video.pause();
+    video.removeAttribute('autoplay');
+    return; // poster image stays visible
+  }
+
+  // The video may already be playable before this script runs
+  // (cached file) — check first, then listen.
+  if (video.readyState >= 3 && !video.paused) {
+    markReady();
+  } else {
+    video.addEventListener('playing', markReady, { once: true });
+  }
+
+  const tryPlay = () => {
+    const attempt = video.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(() => { /* autoplay blocked — poster stays */ });
+    }
   };
 
-  video.addEventListener('canplay', () => video.classList.add('is-ready'), { once: true });
-  video.addEventListener('error', showFallback);
+  tryPlay();
 
-  // If autoplay is blocked or the source fails silently, fall back
-  // after a short grace period rather than leaving a black frame.
-  const readyTimeout = window.setTimeout(() => {
-    if (video.readyState < 2) showFallback();
-  }, 4000);
-
-  video.addEventListener('canplay', () => window.clearTimeout(readyTimeout), { once: true });
-
-  const playPromise = video.play();
-  if (playPromise && typeof playPromise.catch === 'function') {
-    playPromise.catch(() => {
-      // Autoplay was blocked — poster stays visible, no error state needed.
-    });
+  // Save battery/CPU: pause when the reel scrolls out of view
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) tryPlay();
+        else video.pause();
+      });
+    }, { threshold: 0.05 }).observe(video);
   }
 }
 
 /* ---------------------------------------------------------
-   CUSTOM "VIEW" CURSOR
+   CUSTOM CURSOR
    --------------------------------------------------------- */
 function createCursor() {
   const cursor = document.createElement('div');
@@ -55,106 +65,88 @@ function createCursor() {
   document.body.appendChild(cursor);
   document.documentElement.classList.add('has-custom-cursor');
 
-  let targetX = 0;
-  let targetY = 0;
-  let currentX = 0;
-  let currentY = 0;
-  let raf = null;
-
-  function loop() {
-    // Smooth lerp follow — no elastic overshoot, just gentle catch-up.
-    currentX += (targetX - currentX) * 0.18;
-    currentY += (targetY - currentY) * 0.18;
-    cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(${cursor.classList.contains('is-visible') ? 1 : 0.6})`;
-    raf = window.requestAnimationFrame(loop);
-  }
+  let targetX = -200;
+  let targetY = -200;
+  let x = targetX;
+  let y = targetY;
+  let visible = false;
 
   window.addEventListener('mousemove', (event) => {
     targetX = event.clientX;
     targetY = event.clientY;
-  });
+    if (!visible) {
+      x = targetX;
+      y = targetY;
+    }
+  }, { passive: true });
 
-  raf = window.requestAnimationFrame(loop);
+  const loop = () => {
+    x += (targetX - x) * 0.2;
+    y += (targetY - y) * 0.2;
+    const scale = visible ? 1 : 0.6;
+    cursor.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+    window.requestAnimationFrame(loop);
+  };
+  window.requestAnimationFrame(loop);
 
-  return cursor;
+  return {
+    show() { visible = true; cursor.classList.add('is-visible'); },
+    hide() { visible = false; cursor.classList.remove('is-visible'); },
+  };
 }
 
 /* ---------------------------------------------------------
-   PROJECT TILE HOVER PREVIEWS
+   WORK CARD HOVER PREVIEWS
    --------------------------------------------------------- */
-function initProjectTileHover() {
-  const tiles = document.querySelectorAll('[data-project-tile]');
-  if (!tiles.length) return;
+function initWorkCards() {
+  const cards = document.querySelectorAll('[data-work-card]');
+  if (!cards.length || !canHover) return; // touch: poster only, tap opens project
 
-  const cursor = canHover ? createCursor() : null;
+  const cursor = createCursor();
 
-  // Only enable hover video once a tile has been visible on screen,
-  // so we never fetch preview media the visitor hasn't scrolled to.
-  const readyTiles = new WeakSet();
-
-  if ('IntersectionObserver' in window) {
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          readyTiles.add(entry.target);
-          visibilityObserver.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '200px 0px' });
-
-    tiles.forEach((tile) => visibilityObserver.observe(tile));
-  } else {
-    tiles.forEach((tile) => readyTiles.add(tile));
-  }
-
-  tiles.forEach((tile) => {
-    const frame = tile.querySelector('.project-tile__frame');
-    const poster = tile.querySelector('.project-tile__poster');
-    const slug = tile.dataset.slug;
-    const project = PROJECTS.find((item) => item.slug === slug);
-    if (!frame || !poster || !project) return;
-
+  cards.forEach((card) => {
+    const project = PROJECTS.find((item) => item.slug === card.dataset.slug);
+    const media = card.querySelector('.work-card__media');
     let video = null;
 
-    function ensureVideo() {
-      if (video) return video;
+    const ensureVideo = () => {
+      if (video || !project || !project.preview || !media) return video;
       video = document.createElement('video');
-      video.className = 'project-tile__video';
-      video.src = project.previewVideo;
+      video.className = 'work-card__video';
       video.muted = true;
       video.loop = true;
       video.playsInline = true;
-      video.preload = 'none';
+      video.preload = 'auto';
       video.setAttribute('aria-hidden', 'true');
-      video.addEventListener('canplay', () => video.classList.add('is-playing'), { once: false });
-      frame.appendChild(video);
+      video.src = project.preview;
+      video.addEventListener('playing', () => {
+        if (card.matches(':hover')) video.classList.add('is-playing');
+      });
+      media.appendChild(video);
       return video;
-    }
+    };
 
-    if (!canHover) return; // touch devices: poster only, tap navigates via the wrapping link
-
-    frame.addEventListener('mouseenter', () => {
-      if (!readyTiles.has(tile)) return;
+    card.addEventListener('mouseenter', () => {
+      cursor.show();
+      if (reduceMotion) return;
       const v = ensureVideo();
-      const playPromise = v.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(() => {});
-      }
-      if (cursor) cursor.classList.add('is-visible');
+      if (!v) return;
+      const attempt = v.play();
+      if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+      if (v.readyState >= 3) v.classList.add('is-playing');
     });
 
-    frame.addEventListener('mouseleave', () => {
-      if (video) {
-        video.pause();
-        video.currentTime = 0;
-        video.classList.remove('is-playing');
-      }
-      if (cursor) cursor.classList.remove('is-visible');
+    card.addEventListener('mouseleave', () => {
+      cursor.hide();
+      if (!video) return;
+      video.classList.remove('is-playing');
+      video.pause();
+      video.currentTime = 0;
     });
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeroVideo();
-  initProjectTileHover();
+  initShowreel();
+  initWorkCards();
 });

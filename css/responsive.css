@@ -1,183 +1,185 @@
 /* =========================================================
    RESPONSIVE.CSS
-   Mobile-first enhancements. Base rules in style.css already
-   work down to 360px. Breakpoints below progressively enrich
-   the layout for larger viewports.
-   Tested conceptually at: 360 / 390 / 768 / 1024 / 1440 / 1920
+   Desktop-first overrides. Checked at 360 / 390 / 768 / 1024 /
+   1440 / 1920 px widths.
    ========================================================= */
 
 /* ---------------------------------------------------------
-   >= 480px — small phones to large phones
+   Large desktop — keep type from growing past the container
    --------------------------------------------------------- */
-@media (min-width: 480px) {
-  .contact-row {
-    align-items: center;
-  }
-
-  .footer-wordmark {
-    font-size: var(--fs-small);
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 1600px;
   }
 }
 
 /* ---------------------------------------------------------
-   >= 768px — tablet
+   <= 1024px — tablet landscape / small laptop
    --------------------------------------------------------- */
-@media (min-width: 768px) {
-  :root {
-    --header-height-mobile: 80px;
+@media (max-width: 1024px) {
+  .site-nav {
+    gap: 2rem;
   }
 
-  .process__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gallery__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gallery__item--wide {
-    grid-column: span 2;
-  }
-
-  .site-footer__inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .contact-row__label {
-    width: 10rem;
+  .about-me__lists {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 /* ---------------------------------------------------------
-   >= 1024px — desktop: full horizontal nav takes over
+   <= 900px — header collapses into the full-screen menu
    --------------------------------------------------------- */
-@media (min-width: 1024px) {
-  :root {
-    --header-height-mobile: var(--header-height);
+@media (max-width: 900px) {
+  .site-header__inner {
+    grid-template-columns: 1fr auto;
   }
 
-  .site-header__nav {
-    display: flex;
+  .site-nav,
+  .site-header__cta {
+    display: none;
   }
 
   .site-header__menu-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .about-me__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-me__portrait {
+    max-width: 420px;
+  }
+
+  /* No real portrait yet → don't spend mobile screen space on a placeholder */
+  .about-me__portrait--placeholder {
     display: none;
   }
 
+  .cta__head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .site-footer__top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* The mobile menu is only ever needed below 900px */
+@media (min-width: 901px) {
   .mobile-menu {
     display: none;
   }
-
-  .work__title-row {
-    align-items: center;
-  }
-
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg) var(--space-md);
-  }
-
-  .project-meta-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--space-lg);
-  }
-
-  .process__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl) var(--space-lg);
-  }
-
-  .gallery__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .gallery__item--wide {
-    grid-column: span 2;
-  }
-
-  .project-nav {
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-  }
-
-  .project-nav__link--back {
-    align-items: center;
-    text-align: center;
-    order: 2;
-  }
-
-  .project-nav__link--prev {
-    order: 1;
-  }
-
-  .project-nav__link--next {
-    order: 3;
-  }
-
-  .about-hero__heading {
-    max-width: 22ch;
-  }
-
-  .contact-row__link {
-    font-size: clamp(1.75rem, 3vw, 3rem);
-  }
 }
 
 /* ---------------------------------------------------------
-   >= 1440px — large desktop
+   <= 767px — tablet portrait / large phone
    --------------------------------------------------------- */
-@media (min-width: 1440px) {
-  .project-grid {
-    gap: var(--space-xl) var(--space-lg);
+@media (max-width: 767px) {
+  .hero__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 
-  .hero__content {
-    padding-bottom: var(--space-3xl);
+  .reel {
+    aspect-ratio: 16 / 10;
   }
 
-  .section {
-    padding-block: var(--space-3xl);
-  }
-}
-
-/* ---------------------------------------------------------
-   >= 1920px — extra-large desktop
-   --------------------------------------------------------- */
-@media (min-width: 1920px) {
-  .container {
-    padding-inline: max(var(--container-padding), calc((100vw - var(--container-max)) / 2 + 4.5rem));
-  }
-}
-
-/* ---------------------------------------------------------
-   Fine tuning for the smallest supported widths (360 / 390)
-   --------------------------------------------------------- */
-@media (max-width: 359px) {
-  :root {
-    --fs-hero: clamp(3rem, 15vw, 6rem);
+  .work-card--wide {
+    aspect-ratio: 16 / 10;
   }
 
-  .contact-row__label {
-    width: 100%;
+  .cta-form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .about-lines__row,
+  .contact-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
+  }
+
+  .about-lines__row {
+    padding-block: 1rem;
   }
 
   .contact-row {
-    flex-wrap: wrap;
+    padding-top: 1.1rem;
+  }
+
+  .contact-row__link {
+    padding-top: 0.2rem;
+    padding-bottom: 1.1rem;
+  }
+
+  .project-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-nav__link--back {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-items: flex-start;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .project-film--portrait .project-film__frame {
+    height: auto;
+    width: min(100%, 420px);
   }
 }
 
 /* ---------------------------------------------------------
-   Touch devices — remove hover-only affordances, keep 44px targets
+   <= 560px — phones: one project per row
    --------------------------------------------------------- */
-@media (hover: none) and (pointer: coarse) {
+@media (max-width: 560px) {
+  .work-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-card,
+  .work-card--wide {
+    grid-column: auto;
+    aspect-ratio: 4 / 3.4;
+  }
+
+  .about-me__lists {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .site-footer__top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+  }
+
+  .work__more {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------------------------------------------------------
+   Touch devices — no custom cursor, no hover-only affordances
+   --------------------------------------------------------- */
+@media (hover: none), (pointer: coarse) {
   .cursor-view {
     display: none !important;
   }
 
-  .has-custom-cursor .project-tile__frame {
+  .has-custom-cursor .work-card {
     cursor: pointer;
   }
 }

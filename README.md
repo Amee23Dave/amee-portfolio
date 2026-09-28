@@ -1,249 +1,145 @@
 # Amee Dave — Portfolio Website
 
-A premium, minimal portfolio for Amee Dave, AI Filmmaker & Visual Storyteller. Built with plain HTML5, CSS3 and vanilla JavaScript only — no frameworks, no build step, no backend.
+Dark, editorial portfolio for **Amee Dave, AI Filmmaker & Visual Storyteller**.
+Plain HTML, CSS and vanilla JavaScript — no frameworks, no build step, no backend.
+Hosted on **Vercel** (a matching `netlify.toml` is included if you ever move to Netlify).
 
 ---
 
-## 1. Project Overview
+## 1. Pages
 
-- **Pages:** Home, About & Contact, Privacy, 404, and six individual project pages.
-- **Stack:** HTML5, CSS3, vanilla JavaScript (ES modules). No React, no Next.js, no Tailwind, no Bootstrap, no build tools.
-- **Hosting:** designed for GitHub → Netlify, with a custom domain connected afterward.
-- **Fonts:** Bebas Neue (display) and Manrope (body), loaded from Google Fonts.
-- **Colours:** dark pages use `#0A0A0A` background / `#FFFFFF` text; light pages (About, Privacy) use `#F5F2EC` background / `#111111` text; accent is `#E76F2E` throughout.
+| Page | File | Live URL |
+|---|---|---|
+| Home — name, showreel, selected work, about me, contact form | `index.html` | `/` |
+| Work — all projects + contact form | `work.html` | `/work` |
+| About & Contact | `about.html` | `/about` |
+| Project pages (7) | `projects/*.html` | `/projects/<name>` |
+| Privacy | `privacy.html` | `/privacy` |
+| 404 | `404.html` | any missing page |
+
+Old project addresses (`luxury-watch-film`, `perfume-product-film`, `sportswear-ai-film`,
+`ceramic-product-film`, `brand-story-film`, `projects/portfolio`) automatically redirect to the
+correctly named pages. Their files in `/projects/` are only tiny redirect stubs.
 
 ---
 
-## 2. File Structure
+## 2. File structure
 
 ```
 amee-portfolio/
-│
-├── index.html
-├── about.html
-├── privacy.html
-├── 404.html
-├── netlify.toml
-├── robots.txt
-├── sitemap.xml
-├── README.md
-│
-├── projects/
-│   ├── mercedes-live-your-signature.html
-│   ├── luxury-watch-film.html
-│   ├── perfume-product-film.html
-│   ├── sportswear-ai-film.html
-│   ├── ceramic-product-film.html
-│   └── brand-story-film.html
-│
+├── index.html, work.html, about.html, privacy.html, 404.html
+├── projects/                 7 project pages (+ redirect stubs for old URLs)
 ├── css/
 │   ├── reset.css
-│   ├── style.css
-│   ├── animations.css
-│   └── responsive.css
-│
+│   ├── style.css             colours, fonts, every component
+│   ├── animations.css        page transition + reveal motion
+│   └── responsive.css        tablet / mobile layout
 ├── js/
-│   ├── main.js              (header scroll, mobile menu, active nav, scroll reveal)
-│   ├── projects.js          (project data, homepage filters, prev/next nav)
-│   ├── video-controller.js  (hero video, hover previews, custom "VIEW" cursor)
-│   └── transitions.js       (full-screen page transition overlay)
-│
-└── assets/
-    ├── images/     (gallery stills + og-default.jpg)
-    ├── posters/    (poster frames for hero + each project)
-    ├── icons/      (favicon + apple touch icon)
-    └── videos/     (hero + project preview/full placeholder videos)
+│   ├── main.js               header, mobile menu, active nav, contact form
+│   ├── projects.js           project data (used for hover previews)
+│   ├── video-controller.js   showreel, hover previews, "VIEW" cursor
+│   └── transitions.js        page transition overlay
+├── assets/
+│   ├── work/                 ← web-optimised media actually used by the site
+│   ├── fonts/                self-hosted Bebas Neue, Manrope, DM Mono
+│   ├── images/               og-image.jpg (social share image)
+│   ├── icons/                favicons
+│   ├── videos/, posters/     your original full-size files (not loaded by the site)
+├── vercel.json               clean URLs, redirects, security + cache headers
+├── netlify.toml              same rules for Netlify
+├── robots.txt, sitemap.xml
 ```
 
-All CSS/JS/image/page links use **root-relative paths** (e.g. `/css/style.css`, `/projects/mercedes-live-your-signature.html`). This is why the site needs to be served from a local server or Netlify rather than opened directly as a `file://` URL — see the next section.
+---
+
+## 3. Colours & fonts
+
+Edit the tokens at the top of `css/style.css`:
+
+- Background `#0e0e0e` (near-black), raised surfaces `#141414` / `#1a1a1a`
+- Text `#f1f0ec`, muted `#9a9a96`, accent `#e76f2e`
+- Fonts: **Bebas Neue** (headlines), **Manrope** (body), **DM Mono** (labels) — all self-hosted in `assets/fonts/`
 
 ---
 
-## 3. Opening the Website Locally
+## 4. Media in `assets/work/`
 
-Because the site uses root-relative paths and ES module JavaScript (`<script type="module">`), it needs to be served over `http://`, not opened directly from disk. The easiest way is VS Code's Live Server (next section). If you have Python installed, you can also run:
+Each project uses three files named after its slug:
+
+| File | Used for | Recommended export |
+|---|---|---|
+| `<slug>.webp` | card image + page poster | 1600px wide, WebP quality 80 (≈50–200 KB) |
+| `<slug>-preview.mp4` | 5-second hover preview | 960px wide, H.264, no audio, ≈150–500 KB |
+| `<slug>.mp4` | full film on the project page | H.264, CRF 20, AAC audio, "fast start" |
+
+Vertical films also have `<slug>-frame.webp` (a 9:16 poster frame).
+The homepage showreel is `showreel.mp4` (1600px, no audio) with `showreel.webp` as its first frame.
+
+**To replace a file, keep the same name** and push — nothing else needs to change.
+
+Handy ffmpeg commands:
 
 ```bash
-cd amee-portfolio
-python3 -m http.server 5500
+# hover preview (5 s from second 3)
+ffmpeg -ss 3 -t 5 -i input.mp4 -an -vf "scale=960:-2" -c:v libx264 -crf 30 -pix_fmt yuv420p -movflags +faststart slug-preview.mp4
+
+# full film for the web
+ffmpeg -i input.mp4 -c:v libx264 -crf 20 -preset medium -pix_fmt yuv420p -c:a copy -movflags +faststart slug.mp4
 ```
 
-Then open `http://localhost:5500` in your browser.
+Why this matters: images and videos used to be 4–70 MB each, which is why the first section looked
+broken on the first visit and fine after a reload (the browser had cached them by then).
 
 ---
 
-## 4. Running with VS Code Live Server
+## 5. Adding a new project
 
-1. Open the `amee-portfolio` folder in VS Code.
-2. Install the **Live Server** extension (by Ritwick Dey) from the Extensions panel if you don't already have it.
-3. Right-click `index.html` in the file explorer and choose **Open with Live Server**.
-4. Your default browser opens the site at an address like `http://127.0.0.1:5500`. Navigation, filters, hover previews and the mobile menu all work exactly as they will in production.
-
----
-
-## 5. Creating a GitHub Repository
-
-1. Go to [github.com](https://github.com) and click **New repository**.
-2. Name it something like `amee-portfolio`, leave it public or private as you prefer, and skip adding a README (you already have one).
-3. Click **Create repository**. GitHub will show you a page with setup commands — keep that tab open for the next step.
+1. Export the three media files into `assets/work/` (see above).
+2. Duplicate a page in `projects/`, rename it, and change the title, meta tags, role, duration and video paths.
+3. Copy a card (`<a class="work-card" …>`) in `work.html` (and `index.html` if it should be on the homepage),
+   and update the link, image, title and `data-slug`. Add `work-card--wide` for a full-width card.
+4. Add the project to `js/projects.js` so its hover preview plays.
+5. Update the Previous / Next links on the neighbouring project pages and add the URL to `sitemap.xml`.
 
 ---
 
-## 6. Uploading / Pushing Files to GitHub
+## 6. Your portrait (homepage "About me")
 
-From inside the `amee-portfolio` folder, using a terminal:
+Save a portrait as `assets/images/amee-portrait.webp` (about 800 × 1000px). In `index.html`, find the
+`REPLACE` comment in the About section, uncomment the `<img>` line and remove the class
+`about-me__portrait--placeholder`.
+
+---
+
+## 7. Contact form
+
+There is no server. When someone presses **Let's talk**, their own email app opens with a pre-filled
+message to `work.ameedave@email.com`. To change the address, edit `CONTACT_EMAIL` in `js/main.js`
+and the email links in the HTML files. Budget ranges and services are plain text in the form markup.
+
+---
+
+## 8. Deploying (Vercel)
 
 ```bash
-git init
 git add .
-git commit -m "Initial commit — Amee Dave portfolio"
-git branch -M main
-git remote add origin https://github.com/<your-username>/amee-portfolio.git
-git push -u origin main
+git commit -m "Update site"
+git push
 ```
 
-If you'd rather not use the command line, you can also drag and drop the entire `amee-portfolio` folder contents into GitHub's web upload interface on the new repository's page.
+Vercel redeploys automatically on every push to `main`.
+Custom domain: Vercel project → **Settings → Domains → Add**, then follow the DNS instructions.
+Afterwards, find-and-replace `https://www.ameedave.com` with your real domain in all HTML files,
+`sitemap.xml` and `robots.txt`.
+
+Run locally: open the folder in VS Code → right-click `index.html` → **Open with Live Server**
+(or run `python -m http.server` in the folder). Opening the file by double-clicking won't work,
+because the site uses root paths like `/css/style.css`.
 
 ---
 
-## 7. Connecting GitHub to Netlify
+## 9. Analytics & cookies
 
-1. Sign in at [netlify.com](https://netlify.com) (a free account is sufficient — nothing in this project needs a paid plan).
-2. Click **Add new site → Import an existing project**.
-3. Choose **GitHub** and authorize Netlify if prompted.
-4. Select your `amee-portfolio` repository.
-5. Build settings: leave the **Build command** blank (there is no build step) and set the **Publish directory** to the repository root (`.` — this matches `netlify.toml`, so Netlify should pick it up automatically).
-6. Click **Deploy site**.
-
----
-
-## 8. Deploying the Site
-
-Once connected, Netlify deploys automatically:
-
-- Every push to your `main` branch triggers a new deploy.
-- You can also trigger a manual deploy from the Netlify dashboard (**Deploys → Trigger deploy**).
-- `netlify.toml` already configures clean URLs (e.g. `/about` → `about.html`), a proper 404 page, security headers, and sensible caching — no extra dashboard configuration is required.
-
----
-
-## 9. Connecting a Custom Domain
-
-1. In the Netlify dashboard, open your site → **Domain settings → Add a domain**.
-2. Enter your domain (e.g. `ameedave.com`) and follow Netlify's instructions to either:
-   - point your domain's nameservers at Netlify DNS (simplest), or
-   - add the A/CNAME records Netlify gives you at your existing DNS provider.
-3. Netlify automatically provisions a free HTTPS certificate (via Let's Encrypt) once DNS is verified — this can take a few minutes to a few hours.
-4. **Important:** once your final domain is live, replace every placeholder occurrence of `https://www.ameedave.com` with your real domain. It appears in:
-   - `<link rel="canonical">` and Open Graph/Twitter tags in every HTML file
-   - the JSON-LD structured data blocks
-   - `robots.txt` and `sitemap.xml`
-
-A simple way to do this across the whole project: use your code editor's **Find & Replace in Files** for `https://www.ameedave.com` → your real domain.
-
----
-
-## 10. Replacing Images
-
-All placeholder images live in `assets/images/`, `assets/posters/` and `assets/icons/`. They were generated as clearly labelled placeholder graphics (dark background, project title, "placeholder" caption) so the site still looks intentional before real photography is added.
-
-To replace one:
-
-1. Export your final image at the **same filename** (e.g. `mercedes-poster.webp`) so every page that references it updates automatically, **or**
-2. Use a new filename and update the `src` in the relevant HTML file(s) and, for project posters, the `poster` field in `js/projects.js`.
-
-Recommended sizes: posters/hero images at 1920×1080 (16:9), gallery stills at roughly 1600×1067 (landscape) or 1200×1500 (portrait) to match the existing mosaic rhythm.
-
----
-
-## 11. Replacing Hero and Preview Videos
-
-Video files live in `assets/videos/`. Each is currently a short placeholder clip with a text label so autoplay/hover behaviour can be tested end-to-end before real footage arrives.
-
-- **Hero showreel:** `assets/videos/showreel-preview.mp4` (+ optional `.webm`), referenced in `index.html`.
-- **Project hover previews:** `assets/videos/<slug>-preview.mp4`, referenced via the `previewVideo` field in `js/projects.js`.
-- **Full project films:** `assets/videos/<slug>-full.mp4`, referenced via the `fullVideo` field in `js/projects.js` and the `<video>` element in each `/projects/*.html` file.
-
-**Using an external video host instead of local files:** for full project films especially, you may prefer hosting on Vimeo, Cloudflare Stream or Bunny Stream rather than serving large files yourself. Each project page has a comment marking exactly where to swap in an embed or a hosted URL:
-
-```html
-<!-- REPLACE VIDEO: point contentUrl / source at the final edit, or swap for an
-     embed from Vimeo, Cloudflare Stream or Bunny Stream once hosted externally -->
-```
-
-If you switch to an iframe embed, update the `frame-src` line in `netlify.toml`'s Content-Security-Policy to allow that provider's domain.
-
----
-
-## 12. Adding a New Project
-
-1. Open `js/projects.js` and duplicate one of the objects in the `PROJECTS` array. Fill in `number`, `slug`, `title`, `category`, `year`, `duration`, `role`, `tools`, `overview`, `concept`, `visualDirection`, `cinematography`, `production`, `editing`, `poster`, `previewVideo`, `fullVideo` and `gallery`.
-2. Duplicate an existing file in `/projects/` (e.g. `mercedes-live-your-signature.html`), rename it to `<your-slug>.html`, and edit the visible text to match (title, meta description, duration, role, overview, process paragraphs, tools, gallery captions). The header, footer and `<script>` tags at the bottom can stay as they are.
-3. Add a new `<article class="project-tile">` block to the `SELECTED WORK` grid in `index.html`, copying the structure of an existing tile and updating the number, slug, category, title and meta text.
-4. Drop the new poster, preview video and full video files into `assets/posters/` and `assets/videos/` using the paths you set in step 1.
-5. Add the new page's URL to `sitemap.xml`.
-
-Previous/Next navigation on project pages updates automatically — it's generated from the order of the `PROJECTS` array in `js/projects.js`.
-
----
-
-## 13. Updating Contact Details
-
-Email, Instagram and LinkedIn links appear in the header's mobile menu, the About page's contact section, and the footer of every page. To update them, search the project for:
-
-- `work.ameedave@email.com` (appears in `mailto:` links, footers and the mobile menu)
-- `instagram.com/ameedavedesign` (About page contact row)
-- `linkedin.com/in/ameecreator` (About page contact row)
-
-Update each occurrence to match — your editor's project-wide Find & Replace makes this quick.
-
----
-
-## 14. Adding Plausible Analytics
-
-This site ships analytics-ready but with no active tracking by default. Every HTML page has a commented placeholder in the `<head>`:
-
-```html
-<!-- Privacy-friendly analytics (Plausible) — insert once an account exists:
-<script defer data-domain="www.ameedave.com" src="https://plausible.io/js/script.js"></script>
--->
-```
-
-To activate it:
-
-1. Create a account at [plausible.io](https://plausible.io) and add your domain.
-2. Uncomment the script tag in every HTML page (or do a project-wide find of the comment block) and set `data-domain` to your real domain.
-3. Plausible is cookie-free, so **no cookie consent banner is required** for this specific setup. See the note at the end of this README if you later add a cookie-based tool instead.
-
----
-
-## 15. Recommended Video Export Settings
-
-- **Codec:** H.264 (MP4) for maximum compatibility; add a VP9/WebM version for the hero video where possible.
-- **Resolution:** 1920×1080 for hero/full films; hover previews can be exported smaller (1280×800) since they play at thumbnail size.
-- **Bitrate:** aim for a heavily compressed, web-friendly file — roughly 4–6 Mbps for 1080p H.264 is usually enough for a crisp preview without a huge file size.
-- **Audio:** hover previews and the hero video are muted in the browser regardless, so exporting them without an audio track saves file size. Full project films can keep audio.
-- **Duration:** keep hover previews short (4–8 seconds, looping) so they feel responsive and load quickly.
-- **Poster frame:** always export a matching still frame (see image settings below) so the video container never shows an empty black box while loading.
-
----
-
-## 16. Recommended Image Export Settings
-
-- **Format:** WebP for photography and stills (`.webp`) — smaller than JPEG at equivalent quality. Use JPEG only as a fallback if a tool in your pipeline doesn't support WebP.
-- **Poster/hero images:** 1920×1080, quality ~80–85%.
-- **Gallery stills:** 1600×1067 (landscape) or 1200×1500 (portrait), quality ~80–85%.
-- **Social share image (`og-default.jpg`):** exactly 1200×630 for correct rendering on LinkedIn, Twitter/X and Facebook link previews.
-- **Favicon/app icons:** keep the existing SVG (`favicon.svg`) as the primary favicon; only replace the PNG fallbacks if you change the monogram mark.
-
----
-
-## A note on cookies
-
-This project intentionally ships **without a cookie consent banner**, because the recommended analytics setup (Plausible) doesn't use cookies or track individuals across sites. If you later add a tool that *does* set non-essential cookies — advertising pixels, session-replay tools, a cookie-based analytics platform, etc. — you will need to add a cookie consent banner and update `privacy.html` accordingly before deploying that change.
-
----
-
-## Credits
-
-Design and build: created for Amee Dave, AI Filmmaker & Visual Storyteller, based in Gujarat, India.
+Each page has a commented-out Plausible script in the `<head>` — uncomment it once you have an account.
+Plausible is cookie-free, so no cookie banner is needed. If you ever add a tool that sets
+non-essential cookies, add a consent banner and update `privacy.html`.

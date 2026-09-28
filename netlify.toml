@@ -1,22 +1,93 @@
 # =========================================================
-# NETLIFY.TOML
-# Amee Dave — portfolio site configuration.
-# No paid Netlify features are required by anything below.
+# NETLIFY.TOML — kept in sync with vercel.json so the site can
+# be hosted on either platform. No paid features required.
 # =========================================================
 
 [build]
-  # The repo root IS the site root (index.html lives at the top level),
-  # so the publish directory is simply ".".
   publish = "."
 
-# ---------------------------------------------------------
-# CLEAN URLS
-# Let visitors use /about instead of /about.html, etc.
-# (Direct .html links keep working too — these are additive.)
-# ---------------------------------------------------------
+# Old project URLs → renamed pages (force: the old files are stubs)
+[[redirects]]
+  from = "/projects/luxury-watch-film"
+  to = "/projects/badminton-women-player.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/luxury-watch-film.html"
+  to = "/projects/badminton-women-player.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/perfume-product-film"
+  to = "/projects/aqua-hydration-serum.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/perfume-product-film.html"
+  to = "/projects/aqua-hydration-serum.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/sportswear-ai-film"
+  to = "/projects/mahalaxmi-tea-masala.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/sportswear-ai-film.html"
+  to = "/projects/mahalaxmi-tea-masala.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/ceramic-product-film"
+  to = "/projects/e-motorad-electric-cycle.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/ceramic-product-film.html"
+  to = "/projects/e-motorad-electric-cycle.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/brand-story-film"
+  to = "/work.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/brand-story-film.html"
+  to = "/work.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/portfolio"
+  to = "/work.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects/portfolio.html"
+  to = "/work.html"
+  status = 301
+  force = true
+
+# Clean URLs
 [[redirects]]
   from = "/about"
   to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/work"
+  to = "/work.html"
   status = 200
 
 [[redirects]]
@@ -25,32 +96,16 @@
   status = 200
 
 [[redirects]]
-  from = "/work"
-  to = "/index.html#work"
-  status = 200
-
-[[redirects]]
   from = "/projects/:slug"
   to = "/projects/:slug.html"
   status = 200
 
-# ---------------------------------------------------------
-# CUSTOM 404
-# Netlify serves 404.html automatically for unmatched paths
-# when it sits at the publish root — this rule makes that
-# explicit and preserves a real 404 status code for SEO.
-# ---------------------------------------------------------
+# Custom 404
 [[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
 
-# ---------------------------------------------------------
-# SECURITY HEADERS
-# CSP is intentionally permissive on media/frame sources so
-# externally hosted video (Vimeo / Cloudflare Stream / Bunny
-# Stream) and Google Fonts keep working. Tighten as needed.
-# ---------------------------------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
@@ -58,15 +113,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://plausible.io; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://plausible.io; frame-src https://player.vimeo.com https://iframe.mediadelivery.net; base-uri 'self'; form-action 'self'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://plausible.io; style-src 'self'; font-src 'self'; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://plausible.io; frame-src https://player.vimeo.com https://iframe.mediadelivery.net; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
 
-# ---------------------------------------------------------
-# CACHE HEADERS
-# Moderate lifetimes on purpose: placeholder media in this
-# repo gets replaced in place (same filenames) as real assets
-# arrive, so we avoid `immutable` / very long max-age until
-# the project moves to fingerprinted filenames.
-# ---------------------------------------------------------
 [[headers]]
   for = "/css/*"
   [headers.values]
@@ -78,17 +126,17 @@
     Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[headers]]
-  for = "/assets/videos/*"
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/work/*"
   [headers.values]
     Cache-Control = "public, max-age=604800, must-revalidate"
 
 [[headers]]
   for = "/assets/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800, must-revalidate"
-
-[[headers]]
-  for = "/assets/posters/*"
   [headers.values]
     Cache-Control = "public, max-age=604800, must-revalidate"
 

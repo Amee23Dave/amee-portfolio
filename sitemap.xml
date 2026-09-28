@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- REPLACE DOMAIN: swap https://www.ameedave.com for the final live domain throughout this file -->
+<!-- REPLACE DOMAIN: swap https://www.ameedave.com for the final live domain -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.ameedave.com/</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-28</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/about.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.ameedave.com/work</loc>
+    <lastmod>2026-09-28</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/projects/mercedes-live-your-signature.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://www.ameedave.com/about</loc>
+    <lastmod>2026-09-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.ameedave.com/projects/mercedes-live-your-signature</loc>
+    <lastmod>2026-09-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/projects/luxury-watch-film.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://www.ameedave.com/projects/badminton-women-player</loc>
+    <lastmod>2026-09-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/projects/perfume-product-film.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://www.ameedave.com/projects/aqua-hydration-serum</loc>
+    <lastmod>2026-09-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/projects/sportswear-ai-film.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://www.ameedave.com/projects/mahalaxmi-tea-masala</loc>
+    <lastmod>2026-09-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/projects/ceramic-product-film.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://www.ameedave.com/projects/e-motorad-electric-cycle</loc>
+    <lastmod>2026-09-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.ameedave.com/projects/brand-story-film.html</loc>
-    <lastmod>2026-08-06</lastmod>
-    <changefreq>yearly</changefreq>
+    <loc>https://www.ameedave.com/projects/3D-product-perfume-bottle</loc>
+    <lastmod>2026-09-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.ameedave.com/projects/3D-bedroom-animation</loc>
+    <lastmod>2026-09-28</lastmod>
     <priority>0.7</priority>
   </url>
 </urlset>

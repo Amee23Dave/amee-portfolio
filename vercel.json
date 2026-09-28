@@ -2,42 +2,128 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/work", "destination": "/index.html#work", "permanent": false }
+    {
+      "source": "/projects/luxury-watch-film",
+      "destination": "/projects/badminton-women-player",
+      "permanent": true
+    },
+    {
+      "source": "/projects/luxury-watch-film.html",
+      "destination": "/projects/badminton-women-player",
+      "permanent": true
+    },
+    {
+      "source": "/projects/perfume-product-film",
+      "destination": "/projects/aqua-hydration-serum",
+      "permanent": true
+    },
+    {
+      "source": "/projects/perfume-product-film.html",
+      "destination": "/projects/aqua-hydration-serum",
+      "permanent": true
+    },
+    {
+      "source": "/projects/sportswear-ai-film",
+      "destination": "/projects/mahalaxmi-tea-masala",
+      "permanent": true
+    },
+    {
+      "source": "/projects/sportswear-ai-film.html",
+      "destination": "/projects/mahalaxmi-tea-masala",
+      "permanent": true
+    },
+    {
+      "source": "/projects/ceramic-product-film",
+      "destination": "/projects/e-motorad-electric-cycle",
+      "permanent": true
+    },
+    {
+      "source": "/projects/ceramic-product-film.html",
+      "destination": "/projects/e-motorad-electric-cycle",
+      "permanent": true
+    },
+    {
+      "source": "/projects/brand-story-film",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/projects/brand-story-film.html",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/projects/portfolio",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/projects/portfolio.html",
+      "destination": "/work",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://plausible.io; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://plausible.io; frame-src https://player.vimeo.com https://iframe.mediadelivery.net; base-uri 'self'; form-action 'self'" }
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' https://plausible.io; style-src 'self'; font-src 'self'; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://plausible.io; frame-src https://player.vimeo.com https://iframe.mediadelivery.net; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+        }
       ]
     },
     {
       "source": "/css/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
     },
     {
       "source": "/js/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
     },
     {
-      "source": "/assets/videos/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }]
+      "source": "/assets/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
-      "source": "/assets/images/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }]
-    },
-    {
-      "source": "/assets/posters/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }]
-    },
-    {
-      "source": "/assets/icons/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }]
+      "source": "/assets/(work|videos|images|posters|icons)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
+      ]
     }
   ]
 }

@@ -1,30 +1,26 @@
 /* =========================================================
    ANIMATIONS.CSS
-   Keyframes + motion-only rules. All motion here is restrained:
-   no bounce, no elastic easing, no parallax.
-   Respects prefers-reduced-motion (see rule at bottom).
+   Restrained motion only — no bounce, no elastic, no parallax.
+   Every effect here is CSS-driven, so nothing stays hidden if
+   JavaScript is slow or disabled.
    ========================================================= */
 
-/* ---------------------------------------------------------
-   Full-screen page transition overlay (see js/transitions.js)
-   --------------------------------------------------------- */
-@keyframes page-transition-in {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
-}
-
-@keyframes page-transition-out {
+/* Page transition overlay (see .page-transition in style.css) */
+@keyframes page-reveal {
   from { transform: translateY(0); }
   to   { transform: translateY(-100%); }
 }
 
-/* ---------------------------------------------------------
-   Initial content fade-up (hero label/title, headings)
-   --------------------------------------------------------- */
-@keyframes fade-up-in {
+@keyframes page-cover {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* Hero name + meta rise in once on load */
+@keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -32,53 +28,61 @@
   }
 }
 
-.hero__label {
-  animation: fade-up-in var(--duration-slow) var(--ease-editorial) 0.15s both;
+.hero__name,
+.page-title__text,
+.project-hero__title,
+.about-hero__heading,
+.section-heading {
+  animation: rise-in 0.9s var(--ease) 0.25s backwards;
 }
 
-.hero__title {
-  animation: fade-up-in var(--duration-slow) var(--ease-editorial) 0.3s both;
+.hero__meta,
+.page-title__sub,
+.project-hero__eyebrow {
+  animation: rise-in 0.9s var(--ease) 0.4s backwards;
 }
 
-/* ---------------------------------------------------------
-   Simple opacity fade, used for the body wrapper on first paint
-   --------------------------------------------------------- */
-@keyframes page-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-body {
-  animation: page-fade-in var(--duration-base) var(--ease-editorial) both;
-}
-
-/* ---------------------------------------------------------
-   Custom cursor micro-motion (opacity/scale only — no bounce)
-   --------------------------------------------------------- */
-@keyframes cursor-pop-in {
+/* Sections fade upward as they scroll into view.
+   Uses scroll-driven animations where supported; browsers that
+   don't support them simply show the content immediately. */
+@keyframes reveal-up {
   from {
     opacity: 0;
-    transform: scale(0.6);
+    transform: translateY(32px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
-/* ---------------------------------------------------------
-   Reduced motion — disable non-essential animation entirely
-   --------------------------------------------------------- */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+/* Reduced motion — switch everything off */
 @media (prefers-reduced-motion: reduce) {
-  .hero__label,
-  .hero__title,
-  body {
+  .hero__name,
+  .page-title__text,
+  .project-hero__title,
+  .about-hero__heading,
+  .section-heading,
+  .hero__meta,
+  .page-title__sub,
+  .project-hero__eyebrow,
+  .reveal {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
-  .page-transition.is-active,
-  .page-transition.is-entering {
+  .page-transition,
+  .page-transition.is-covering {
     animation: none !important;
-    transition: none !important;
+    transform: translateY(-100%) !important;
   }
 }
